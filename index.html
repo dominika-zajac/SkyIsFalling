@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="js/aframe-0.8.0.min.js"></script>
+    <script src="js/aframe-physics-system-3.0.2.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+</head>
+<body>
+<a-scene physics="gravity: 0">
+    <a-assets>
+        <img id="targetImg" src="img/acorn.png">
+        <a-asset-item id="baseball-obj" src="models/ball/baseball.obj"></a-asset-item>
+        <a-asset-item id="baseball-mtl" src="models/ball/baseball.mtl"></a-asset-item>
+    </a-assets>
+
+    <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    <a-plane class="spot" opacity="0" rotation="-90 0 0" width="25" height="25" static-body shadow="receive: true;"></a-plane>
+
+    <a-camera look-controls wasd-controls position="0 2.5 0">
+        <a-entity cursor="fuse: true; fuseTimeout: 1" position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.03; radiusOuter: 0.04;"
+                  material="color: white; shader: flat;">
+            <a-sphere id="ball" scale="4 4 4" position="1 -0.5 -0.2" obj-model="obj: #baseball-obj; mtl: #baseball-mtl">
+            </a-sphere>
+        </a-entity>
+    </a-camera>
+
+
+    <a-box id="messageBox" class="spot" position="0 0.8 -3" color="#324477" width="2.4" height="0.8" depth="0.15"
+            rotation="-15 0 0" cursor-listener static-body>
+        <a-text class="spot" id="message" font="fonts/mozillavr.fnt" value="Look here\nto start the game"
+                position="0 0.15 0.1" color="white" align="center"></a-text>
+    </a-box>
+
+    <a-entity light="type: directional; color: #ffffff; intensity: 0.8; castShadow: true;" position="-10 20 10"></a-entity>
+    <a-entity light="type: hemisphere; color: #ffffff; groundColor: #cccccc; intensity: 0.3;"></a-entity>
+
+    <a-cylinder id="target" height="0.1" segments-radial="8" scale = "0.5 1 0.5" shadow="cast: true; receive: false;"
+                src="#targetImg" cursor-listener dynamic-body="mass: 1;"
+           position="0 -4 -3" rotation="20 40 0" sound="src: url(sfx/quack.wav); autoplay: false; loop: false;">
+    </a-cylinder>
+
+    <a-sphere id="bullet" position="0 -0.2 0" scale="2 2 2" obj-model="obj: #baseball-obj; mtl: #baseball-mtl"
+              shadow="cast: true; receive: false;" dynamic-body="mass: 1;">
+    </a-sphere>
+
+</a-scene>
+</body>
+<script src="js/custom-script.js"></script>
+</html>
