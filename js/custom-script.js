@@ -36,7 +36,6 @@ const resetTarget = () => {
 };
 
 qS("#bullet").addEventListener('collide', (e) => {
-    console.log("bullet", playing, shootingAllowed);
     if (!playing) return;
     let target = qS("#target");
     if(e.detail.body.id === target.body.id && !hit) {
@@ -51,8 +50,10 @@ qS("#bullet").addEventListener('collide', (e) => {
 qSA(".spot").forEach(function(element) {
     element.addEventListener('collide', (e) => {
         let target = qS("#target");
+        let spot = qSA(".spot")[0];
         if(e.detail.body.id === target.body.id) {
             playing = false;
+            spot.components.sound.playSound();
             qS("#messageBox").setAttribute("position","0 0.5 -3");
             qS("#message").setAttribute("value","Game over!\nYour score: "+score + "\nLook here\\nto try again");
         }
@@ -64,7 +65,7 @@ qS("#messageBox").addEventListener('collide', (e) => {
         playing = true;
         score = 0;
         shootingAllowed = true;
-        velo += dVelo;
+        velo = 0;
         qS("#target").body.velocity.set(0,velo,0);
         resetTarget()
 

@@ -6,7 +6,7 @@
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
 </head>
 <body>
-<a-scene physics="gravity: 0">
+<a-scene physics="gravity: 0" sound="src: url(music/background.mp3); autoplay: true; loop: true">
     <a-assets>
         <img id="targetImg" src="img/acorn.png">
         <a-asset-item id="baseball-obj" src="models/ball/baseball.obj"></a-asset-item>
@@ -14,7 +14,8 @@
     </a-assets>
 
     <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
-    <a-plane class="spot" opacity="0" rotation="-90 0 0" width="25" height="25" static-body shadow="receive: true;"></a-plane>
+    <a-plane class="spot" opacity="0" rotation="-90 0 0" width="25" height="25" static-body shadow="receive: true;"
+             sound="src: url(music/end.mp3); autoplay: false; loop: false; volume: 8;"></a-plane>
 
     <a-camera look-controls wasd-controls position="0 2.5 0">
         <a-entity cursor="fuse: true; fuseTimeout: 1" position="0 0 -1"
@@ -37,7 +38,7 @@
 
     <a-cylinder id="target" height="0.1" segments-radial="8" scale = "0.5 1 0.5" shadow="cast: true; receive: false;"
                 src="#targetImg" cursor-listener dynamic-body="mass: 1;"
-           position="0 -4 -3" rotation="20 40 0" sound="src: url(sfx/quack.wav); autoplay: false; loop: false;">
+           position="0 -4 -3" rotation="20 40 0" sound="src: url(music/boom.mp3); autoplay: false; loop: false; volume: 3; poolSize: 3">
     </a-cylinder>
 
     <a-sphere id="bullet" position="0 -0.2 0" scale="2 2 2" obj-model="obj: #baseball-obj; mtl: #baseball-mtl"
