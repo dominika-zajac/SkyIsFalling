@@ -6,6 +6,15 @@
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
 </head>
 <body>
+
+<a-scene physics="gravity: 0">
+
+    <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+    <a-plane class="spot" opacity="0" rotation="-90 0 0" width="25" height="25" static-body shadow="receive: true;"
+             sound="src: url(music/end.mp3); autoplay: false; loop: false; volume: 8;"></a-plane>
+
+</a-scene>
+
 </body>
 <script src="js/custom-script.js"></script>
 </html>
