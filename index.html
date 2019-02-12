@@ -8,11 +8,36 @@
 <body>
 
 <a-scene physics="gravity: 0">
+    <a-assets>
+        <img id="targetImg" src="img/acorn.png">
+        <a-asset-item id="baseball-obj" src="models/ball/baseball.obj"></a-asset-item>
+        <a-asset-item id="baseball-mtl" src="models/ball/baseball.mtl"></a-asset-item>
+    </a-assets>
+
+
 
     <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
     <a-plane class="spot" opacity="0" rotation="-90 0 0"
              width="25" height="25" static-body shadow="receive: true;">
     </a-plane>
+
+    <a-camera look-controls wasd-controls position="0 2.5 0">
+        <a-entity cursor="fuse: true; fuseTimeout: 1" position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.03; radiusOuter: 0.04;"
+                  material="color: white; shader: flat;">
+            <a-sphere id="ball" scale="4 4 4" position="1 -0.5 -0.2" obj-model="obj: #baseball-obj; mtl: #baseball-mtl">
+            </a-sphere>
+        </a-entity>
+    </a-camera>
+
+    <a-cylinder id="target" height="0.1" segments-radial="8" scale = "0.5 1 0.5" shadow="cast: true; receive: false;"
+                src="#targetImg" dynamic-body="mass: 1;"
+                position="0 -4 -3" rotation="20 40 0">
+    </a-cylinder>
+
+    <a-sphere id="bullet" position="0 -0.2 0" scale="2 2 2" obj-model="obj: #baseball-obj; mtl: #baseball-mtl"
+              shadow="cast: true; receive: false;" dynamic-body="mass: 1;">
+    </a-sphere>
 
 </a-scene>
 
